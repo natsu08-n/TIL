@@ -183,6 +183,142 @@ console.log(calcBMIObject(Anna));*/
 console.log(obj.double(100));
 console.log(obj.double2(100));*/
 
+/*------------------------------------------------
+4.1.7　可変長引数の宣言
+------------------------------------------------*/
+
+/*const sum = (base: number, ...args: number[]): number => {
+    let result = base * 10;
+    for (const num of args) {
+        result += num;
+    }
+    return result;
+}
+
+console.log(sum(2, 4, 6));//2がbase, 残りが可変長引数に入る　*/
+
+/*------------------------------------------------
+4.1.8　関数呼び出しにおけるスプレッド構文
+------------------------------------------------*/
+
+/*const sum = (...args: number[]): number => {
+    let result = 0;
+    for (const num of args) {
+        result += num;
+    }
+    return result;
+}
+
+const arr = [1, 2, 3, 4]
+
+console.log(sum(...arr));*/  //関数呼び出し時にスプレッド構文を使っている
+//引数に使いたい配列の長さがわからないときに使うと便利
+
+/*------------------------------------------------
+4.1.9　オプショナル引数の宣言
+------------------------------------------------*/
+/*const toLowerOrUpper = (str: string, upper?: boolean): string => {
+    if (upper) {
+        return str.toUpperCase();
+    } else {
+        return str.toLowerCase();
+    }
+}
+
+console.log(toLowerOrUpper("Hello"));
+console.log(toLowerOrUpper("Hello", false));
+console.log(toLowerOrUpper("Hello", true));*/
+
+/*------------------------------------------------
+4.1.10　コールバック関数を使ってみる
+------------------------------------------------*/
+/*type User = {name: string; age: number};
+const getName = (u: User): string => u.name;
+const users: User[] = [
+    {name: "akira", age: 26},
+    {name: "kaneda", age: 17}
+];
+
+const names = users.map(getName);
+console.log(names);*/
+
+//コールバック関数に関数の中身を直接入れたバージョン。こっちのが見通しがよい。
+//コールバック関数を引数として受け取るような関数は高階関数と呼ぶ。
+/*type User = {name: string; age: number};
+const users: User[] = [
+    {name: "akira", age: 26},
+    {name: "kaneda", age: 17}
+];
+
+const names = users.map((u: User): string => u.name);
+console.log(names);*/
+
+/*================================================
+4.2　関数の型
+================================================*/
+
+/*------------------------------------------------
+4.2.1　関数型の記法
+------------------------------------------------*/
+//xRepeat二カーソルを合わせると関数型の記法が見える
+//関数型　は　(引数リスト) => 返り値の型
+// const xRepeat = (num: number): string => "x".repeat(num);
+
+/*------------------------------------------------
+4.2.2　返り値の型注釈は省略可能
+------------------------------------------------*/
+//返り値を書かないと型推論で決められる。ここでは返り値がvoidになっている。
+/*const g = (num: number) => {
+    for (let i = 0; i < num; i++) {
+        console.log("hello, world!");
+    }
+}*/
+
+/*------------------------------------------------
+4.2.3　返り値の型注釈は省略すべきか
+------------------------------------------------*/
+//返り値の型を明示する利点: 関数内部で返り値の型に対して型チェックを働かせられる
+/*function range(min: number, max: number): number[] {
+    const result = [];
+    for (let i = min; i <= max; i++) {
+        result.push(i);
+    }
+    return result;
+}
+
+const arr = range(5, 10);
+for (const value of arr) console.log(value);*/
+
+/*------------------------------------------------
+4.2.4　引数の型注釈が省略可能な場合
+------------------------------------------------*/
+//逆方向の型推論(contextual typing)：式の型が先にわかっている場合に、それをもとに式の内部に対して推論が働く。
+//変数宣言の時に変数に型注釈を入れた例↓
+/*type F = (arg: number) => string;
+const xRepeat: F = (num) => "X".repeat(num);*/
+
+//関数引数の場合↓
+const nums = [1,2,3,4,5,6,7,8,9];
+const arr2 = nums.filter((x) => x % 3 === 0);
+console.log(arr2);
+//filterの型定義によりfilterが受け取るコールバック関数の型が判明している。
+
+//文脈上の型がオブジェクト型を伝播してくる場合↓
+type Greetable = {
+    greet: (str: string) => string;
+}
+const obj: Greetable = {
+    greet: (str) => `Hello, ${str}!`
+}
+
+//省略できるのかどうなのか、迷ったら省略してみて、コンパイルエラーがでるか見るのも一つの手。
+
+
+
+
+
+
+
 
 
 

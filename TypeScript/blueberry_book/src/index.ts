@@ -298,7 +298,7 @@ for (const value of arr) console.log(value);*/
 const xRepeat: F = (num) => "X".repeat(num);*/
 
 //関数引数の場合↓
-const nums = [1,2,3,4,5,6,7,8,9];
+/*const nums = [1,2,3,4,5,6,7,8,9];
 const arr2 = nums.filter((x) => x % 3 === 0);
 console.log(arr2);
 //filterの型定義によりfilterが受け取るコールバック関数の型が判明している。
@@ -309,9 +309,41 @@ type Greetable = {
 }
 const obj: Greetable = {
     greet: (str) => `Hello, ${str}!`
+}*/
+//省略できるのかどうなのか、迷ったら省略してみて、コンパイルエラーがでるか見るのも一つの手。
+
+/*------------------------------------------------
+4.2.5　コールシグネチャによる関数型の表現
+------------------------------------------------*/
+
+//コールシグネチャはオブジェクト型の中で使用できる構文。
+// (引数リスト):返り値の型;
+
+/*type MyFunc = {
+    isUsed?: boolean;
+    (arg: number): void;
+};
+
+const double: MyFunc = (arg: number) => {
+    console.log(arg * 2);
 }
 
-//省略できるのかどうなのか、迷ったら省略してみて、コンパイルエラーがでるか見るのも一つの手。
+double.isUsed = true;
+console.log(double.isUsed);
+double(1000);
+
+//次の書き方の意味は同じ。
+//普通の関数型の書き方
+type F = (arg: string) => number;
+//コールシグネチャの関数型の書き方
+type G = {(arg: string): number; };
+
+//複数のコールシグネチャを持つ場合。
+//string型を引数として渡すとnumber型を返し、number型を引数として渡すとboolean型を返す
+type SwapFunc = {
+    (arg: string): number;
+    (arg: number): boolean;
+}*/
 
 
 
